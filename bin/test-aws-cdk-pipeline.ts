@@ -2,9 +2,11 @@
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
 import { TestAwsCdkPipelineStack } from '../lib/test-aws-cdk-pipeline-stack';
+import { Tags } from 'aws-cdk-lib';
 
 const app = new cdk.App();
-new TestAwsCdkPipelineStack(app, 'TestAwsCdkPipelineStack', {
+const name = 'TestAwsCdkPipelineStack'
+new TestAwsCdkPipelineStack(app, name, {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
@@ -19,5 +21,7 @@ new TestAwsCdkPipelineStack(app, 'TestAwsCdkPipelineStack', {
 
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
 });
+
+Tags.of(app).add('Project', name);
 
 app.synth();
